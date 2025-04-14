@@ -1,0 +1,60 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 300000
+      connection-timeout: 20000
+      max-lifetime: 1200000
+      auto-commit: true
+      pool-name: HikariPool-1
+      validation-timeout: 5000
+      leak-detection-threshold: 60000
+      shutdown-timeout: 10000
+
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        default_schema: PUBLIC
+        connection:
+          provider_disables_autocommit: false
+        generate_statistics: false
+        jdbc:
+          batch_size: 25
+          fetch_size: 50
+          time_zone: UTC
+        order_inserts: true
+        order_updates: true
+        query:
+          fail_on_pagination_over_collection_fetch: true
+          in_clause_parameter_padding: true
+    show-sql: true
+    open-in-view: false
+    defer-datasource-initialization: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+server:
+  port: 8090
+  shutdown: graceful
+  tomcat:
+    connection-timeout: 30s
+    max-connections: 200
+    accept-count: 100
+    threads:
+      max: 200
+      min-spare: 10
+
+
+
